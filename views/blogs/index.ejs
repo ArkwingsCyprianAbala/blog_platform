@@ -1,24 +1,318 @@
-<!DOCTYPE html>
-<html lang="en">
 <%- include('../partials/head.ejs') %>
-<body>
 
-    <!-- <%- include('../partials/nav.ejs') %> -->
+    <body>
+        <%- include('../partials/navbar.ejs') %>
 
-    <div class="blogs content">
-        <h2><a href="/blogs/create">Add New Blog</a></h2>
+            <div class="blogs content">
+                <h2 class="page-title">Explore Our Blog</h2>
 
-        <% if (blogs.length > 0) { %>
-            <% blogs.forEach(blog => { %>
-                <a class="single" href="/blogs/<%= blog._id %>">
-                <h3 class="title"><%= blog.title %></h3>
-                <p class="snippet"><%= blog.snippet %></p>
-                </a>
-            <% }) %>
-        <% } else { %>
-            <p>There are no blogs to display</p>
-        <% } %>
-    </div>
-    <%- include('../partials/footer.ejs') %>
-</body>
-</html>
+                <div class="blogs-grid">
+                    <% if (blogs.length> 0) { %>
+                        <% blogs.forEach(blog=> { %>
+                            <article class="blog-card">
+                                <div class="blog-content">
+                                    <h3 class="blog-title">
+                                        <%= blog.title %>
+                                    </h3>
+                                    <p class="blog-snippet">
+                                        <%= blog.snippet %>
+                                    </p>
+                                    <div class="blog-meta">
+                                        <span class="author">
+                                            <i class="fas fa-user"></i>
+                                            <%= blog.author %>
+                                        </span>
+                                        <span class="date">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <%= blog.createdAt.toLocaleDateString() %>
+                                        </span>
+                                    </div>
+                                    <a href="/blogs/<%= blog._id %>" class="read-more">Read More <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+                            <% }) %>
+                                <% } else { %>
+                                    <p class="no-blogs">No blogs yet. Be the first to create one!</p>
+                                    <% } %>
+                </div>
+            </div>
+
+            <style>
+                .blogs.content {
+                    max-width: 1200px;
+                    margin: 140px auto 40px;
+                    padding: 0 20px;
+                    position: relative;
+                }
+
+                .page-title {
+                    text-align: center;
+                    font-size: 2.8rem;
+                    margin-bottom: 3rem;
+                    font-weight: 800;
+                    background: linear-gradient(45deg, #2196F3, #673AB7, #2196F3);
+                    background-size: 200% auto;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    padding-top: 30px;
+                    animation: gradient 3s linear infinite;
+                }
+
+                .page-title::after {
+                    content: '';
+                    display: block;
+                    width: 100px;
+                    height: 5px;
+                    background: linear-gradient(45deg, #2196F3, #673AB7);
+                    margin: 15px auto;
+                    border-radius: 50px;
+                    transform: scaleX(0.7);
+                    animation: pulse 2s infinite;
+                }
+
+                .blogs-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                    gap: 2.5rem;
+                    padding: 1rem;
+                }
+
+                .blog-card {
+                    background: linear-gradient(145deg, var(--bg-secondary), var(--card-bg));
+                    border-radius: 16px;
+                    overflow: hidden;
+                    box-shadow: 0 8px 30px var(--shadow-color);
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    border: 1px solid var(--border-color);
+                    animation: fadeInUp 0.6s ease backwards;
+                    position: relative;
+                }
+
+                .blog-card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    background: linear-gradient(45deg, #2196F3, #673AB7);
+                    transform: scaleX(0);
+                    transition: transform 0.3s ease;
+                }
+
+                .blog-card:hover::before {
+                    transform: scaleX(1);
+                }
+
+                .blog-card:hover {
+                    transform: translateY(-10px) scale(1.02);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                }
+
+                .blog-content {
+                    padding: 2rem;
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .blog-title {
+                    color: white;
+                    font-size: 1.8rem;
+                    margin-bottom: 1.2rem;
+                    line-height: 1.4;
+                    font-weight: 700;
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .blog-title::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    width: 50px;
+                    height: 3px;
+                    background: linear-gradient(45deg, #2196F3, #673AB7);
+                    transform: scaleX(0);
+                    transition: transform 0.3s ease;
+                }
+
+                .blog-card:hover .blog-title::after {
+                    transform: scaleX(1);
+                }
+
+                .blog-snippet {
+                    color: rgba(255, 255, 255, 0.9);
+                    margin-bottom: 1.8rem;
+                    line-height: 1.7;
+                    font-size: 1.1rem;
+                }
+
+                .blog-meta {
+                    display: flex;
+                    justify-content: space-between;
+                    color: rgba(255, 255, 255, 0.8);
+                    font-size: 0.95rem;
+                    margin-bottom: 1.8rem;
+                    padding-bottom: 1.2rem;
+                    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .blog-meta i {
+                    margin-right: 8px;
+                    background: linear-gradient(45deg, #2196F3, #673AB7);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    transition: transform 0.3s ease;
+                }
+
+                .blog-card:hover .blog-meta i {
+                    transform: scale(1.2);
+                }
+
+                .read-more {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    background: linear-gradient(45deg, #2196F3, #673AB7);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 50px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .read-more::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(45deg, #673AB7, #2196F3);
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .read-more:hover::before {
+                    opacity: 1;
+                }
+
+                .read-more span {
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .read-more i {
+                    position: relative;
+                    z-index: 1;
+                    transition: transform 0.3s ease;
+                }
+
+                .read-more:hover i {
+                    transform: translateX(5px);
+                }
+
+                @keyframes gradient {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+
+                    50% {
+                        background-position: 100% 50%;
+                    }
+
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+
+                @keyframes pulse {
+
+                    0%,
+                    100% {
+                        transform: scaleX(0.7);
+                    }
+
+                    50% {
+                        transform: scaleX(1);
+                    }
+                }
+
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(30px);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                .blog-card:nth-child(2) {
+                    animation-delay: 0.2s;
+                }
+
+                .blog-card:nth-child(3) {
+                    animation-delay: 0.4s;
+                }
+
+                .blog-card:nth-child(4) {
+                    animation-delay: 0.6s;
+                }
+
+                .no-blogs {
+                    text-align: center;
+                    grid-column: 1 / -1;
+                    color: white;
+                    font-size: 1.3rem;
+                    padding: 3rem;
+                    background: linear-gradient(145deg, var(--bg-secondary), var(--card-bg));
+                    border-radius: 16px;
+                    border: 2px dashed rgba(255, 255, 255, 0.1);
+                    margin: 2rem 0;
+                    animation: pulse 2s infinite;
+                }
+
+                @media (max-width: 768px) {
+                    .blogs.content {
+                        margin-top: 120px;
+                    }
+
+                    .page-title {
+                        font-size: 2.2rem;
+                        padding-top: 20px;
+                    }
+
+                    .blogs-grid {
+                        grid-template-columns: 1fr;
+                        gap: 2rem;
+                        padding: 0.5rem;
+                    }
+
+                    .blog-content {
+                        padding: 1.5rem;
+                    }
+
+                    .read-more {
+                        width: 100%;
+                        justify-content: center;
+                    }
+
+                    .blog-card:hover {
+                        transform: translateY(-5px) scale(1.01);
+                    }
+                }
+            </style>
+
+            <%- include("../partials/footer.ejs") %>
+    </body>

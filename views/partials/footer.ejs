@@ -1,3 +1,203 @@
 <footer class="footer">
-    Copyright &copy; blog platform 2024
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>BlogSpace</h3>
+            <p>A platform for writers to share their stories and connect with readers around the world.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blogs">Blogs</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Categories</h4>
+            <ul>
+                <li><a href="/blogs/technology">Technology</a></li>
+                <li><a href="/blogs/lifestyle">Lifestyle</a></li>
+                <li><a href="/blogs/travel">Travel</a></li>
+                <li><a href="/blogs/food">Food</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Newsletter</h4>
+            <p>Subscribe to our newsletter for the latest updates.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 BlogSpace. All rights reserved.</p>
+    </div>
 </footer>
+
+<style>
+    .footer {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: #fff;
+        padding: 4rem 2rem 1rem;
+        margin-top: 4rem;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+    }
+
+    .footer-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #2196F3, #673AB7);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .footer-section h4 {
+        color: #fff;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .footer-section p {
+        color: #a0a0a0;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+        background: linear-gradient(45deg, #2196F3, #673AB7);
+        transform: translateY(-3px);
+    }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 0.8rem;
+    }
+
+    .footer-section ul a {
+        color: #a0a0a0;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .footer-section ul a:hover {
+        color: #2196F3;
+        padding-left: 5px;
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .newsletter-form input {
+        flex: 1;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+
+    .newsletter-form input::placeholder {
+        color: #a0a0a0;
+    }
+
+    .newsletter-form button {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(45deg, #2196F3, #673AB7);
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+    }
+
+    .footer-bottom {
+        text-align: center;
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom p {
+        color: #a0a0a0;
+    }
+
+    /* Add Font Awesome CDN in your head.ejs */
+    @media (max-width: 768px) {
+        .footer-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .social-links {
+            justify-content: center;
+        }
+
+        .newsletter-form {
+            flex-direction: column;
+        }
+
+        .newsletter-form button {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- Add this script tag to your head.ejs file -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

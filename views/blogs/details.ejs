@@ -1,30 +1,74 @@
 <html lang="en">
 <%- include("../partials/head.ejs") %>
-<body>
 
-    <!-- <%- include('../partials/nav.ejs') %> -->
+    <body>
 
-    <div class="details content">
-        <h2><%= blog.title %></h2>
-        <div class="content">
-            <p><%= blog.body %></p>
-        </div>
-        <a class="delete" data-doc="<%= blog._id %>">delete</a>
-    </div>
+        <%- include('../partials/navbar.ejs') %>
 
-    <%- include("../partials/footer.ejs") %>
+            <div class="details-container">
+                <article class="blog-details">
+                    <!-- Blog Header Section -->
+                    <div class="blog-header">
+                        <h2 class="blog-title">
+                            <%= blog.title %>
+                        </h2>
+                        <div class="blog-meta">
+                            <span class="blog-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <%= blog.createdAt.toLocaleDateString() %>
+                            </span>
+                            <span class="blog-author">
+                                <i class="far fa-user"></i>
+                                <%= blog.author || 'Anonymous' %>
+                            </span>
+                        </div>
+                    </div>
 
-    <script>
-        const trashcan = document.querySelector('a.delete');
-        trashcan.addEventListener('click', (e) => {
-            const endpoint = `/blogs/${trashcan.dataset.doc}`;
-            fetch(endpoint, {
-                method: 'DELETE'
-            })
-            .then((response) => response.json())
-            .then((data) => window.location.href = data.redirect)
-            .catch(err => console.log(err))
-        })
-    </script>
-</body>
+                    <!-- Blog Content Section -->
+                    <div class="blog-content">
+                        <p>
+                            <%= blog.body %>
+                        </p>
+                    </div>
+
+                    <!-- Blog Footer Section -->
+                    <div class="blog-footer">
+                        <div class="blog-tags">
+                            <i class="fas fa-tags"></i>
+                            <% const tags=blog.tags || ['uncategorized'] %>
+                                <% tags.forEach(tag=> { %>
+                                    <span class="tag">
+                                        <%= tag %>
+                                    </span>
+                                    <% }) %>
+                        </div>
+
+                        <div class="blog-actions">
+                            <a href="/blogs/<%= blog._id %>/edit" class="edit-btn">
+                                <i class="fas fa-edit"></i> Edit Post
+                            </a>
+                            <a class="delete-btn" data-doc="<%= blog._id %>">
+                                <i class="fas fa-trash"></i> Delete Post
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <%- include("../partials/footer.ejs") %>
+
+                <script>
+                    const trashcan = document.querySelector('a.delete-btn');
+                    trashcan.addEventListener('click', (e) => {
+                        const endpoint = `/blogs/${trashcan.dataset.doc}`;
+                        fetch(endpoint, {
+                            method: 'DELETE'
+                        })
+                            .then((response) => response.json())
+                            .then((data) => window.location.href = data.redirect)
+                            .catch(err => console.log(err))
+                    })
+                </script>
+    </body>
+
 </html>

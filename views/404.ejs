@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./partials/head.ejs') %>
-<body>
 
-    <%- include('./partials/nav.ejs') %>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
 
-    <div class="not-found content">
-        OOPS, page not found :)
-    </div>
-    <%- include('./partials/footer.ejs') %>
-</body>
+            <main class="not-found">
+                <div class="error-container">
+                    <div class="error-graphic">
+                        <div class="circle"></div>
+                        <h1>4<span class="zero">0</span>4</h1>
+                    </div>
+                    <h2>Oops! Page Not Found</h2>
+                    <p>The page you're looking for seems to have wandered off into the digital wilderness...</p>
+                    <div class="buttons">
+                        <a href="/" class="home-button">
+                            <span class="button-text">Back to Home</span>
+                            <i class="arrow">→</i>
+                        </a>
+                        <button onclick="window.history.back()" class="back-button">
+                            <i class="arrow">←</i>
+                            <span class="button-text">Go Back</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            <%- include('./partials/footer.ejs') %>
+
+                <script>
+                    // Mobile menu toggle script
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const navToggle = document.querySelector('.nav-toggle');
+                        const navMenu = document.querySelector('.nav-menu');
+
+                        navToggle?.addEventListener('click', () => {
+                            navMenu.classList.toggle('active');
+                            navToggle.classList.toggle('active');
+                        });
+                    });
+                </script>
+    </body>
+
 </html>

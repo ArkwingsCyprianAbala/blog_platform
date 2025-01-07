@@ -1,64 +1,450 @@
-<!-- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Ninja | <%= title %></title>
-    <link rel="stylesheet" href="/styles.css">
-</head>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Ninja | <%= title %></title>
-  <link rel="stylesheet" href="/styles.css">
+  <title>
+    <%= typeof title !=='undefined' ? title : 'Blog Platform' %>
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+
+  <% if (typeof title !=='undefined' && title==='404' ) { %>
+    <link rel="stylesheet" href="/styles/404.css">
+    <% } %>
+
+      <style>
+        :root[data-theme="light"] {
+          --bg-primary: #f8f9fa;
+          --bg-secondary: #ffffff;
+          --text-primary: #333333;
+          --text-secondary: #666666;
+          --nav-bg: rgba(255, 255, 255, 0.98);
+          --border-color: #eeeeee;
+          --shadow-color: rgba(0, 0, 0, 0.1);
+          --card-bg: #ffffff;
+        }
+
+        :root[data-theme="dark"] {
+          --bg-primary: #121212;
+          --bg-secondary: #1e1e1e;
+          --text-primary: #ffffff;
+          --text-secondary: #a0a0a0;
+          --nav-bg: rgba(18, 18, 18, 0.98);
+          --border-color: #333333;
+          --shadow-color: rgba(0, 0, 0, 0.3);
+          --card-bg: #2d2d2d;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+          background-color: var(--bg-primary);
+          color: var(--text-primary);
+          transition: background-color 0.3s ease, color 0.3s ease;
+          min-height: 100vh;
+        }
+
+        .navbar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+          transition: all 0.3s ease;
+        }
+
+        .navbar:hover {
+          box-shadow: 0 4px 30px var(--shadow-color);
+        }
+
+        .nav-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 1rem 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          text-decoration: none;
+          transform: translateY(0);
+          transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+          transform: translateY(-2px);
+        }
+
+        .logo-icon {
+          font-size: 1.5rem;
+          animation: wave 2s infinite;
+        }
+
+        .logo-text {
+          font-size: 1.5rem;
+          font-weight: 800;
+          background: linear-gradient(45deg, #64B5F6, #9575CD);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+
+        .nav-menu {
+          display: flex;
+          align-items: center;
+          gap: 3rem;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 2rem;
+        }
+
+        .nav-link {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          text-decoration: none;
+          color: #ffffff;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          position: relative;
+          padding: 0.5rem 0;
+        }
+
+        .nav-icon {
+          font-size: 1.2rem;
+          transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover .nav-icon {
+          transform: scale(1.2);
+        }
+
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: 0;
+          left: 0;
+          background: linear-gradient(45deg, #2196F3, #673AB7);
+          transition: width 0.3s ease;
+          border-radius: 2px;
+        }
+
+        .nav-link:hover::after {
+          width: 100%;
+        }
+
+        .nav-auth {
+          display: flex;
+          gap: 1.5rem;
+          align-items: center;
+          margin-left: 1rem;
+          padding-left: 1.5rem;
+          border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-auth .login {
+          color: #64B5F6;
+          font-weight: 600;
+        }
+
+        .nav-auth .signup {
+          background: linear-gradient(45deg, #2196F3, #673AB7);
+          color: white;
+          padding: 0.8rem 1.5rem;
+          border-radius: 50px;
+          font-weight: 600;
+          box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+          transition: all 0.3s ease;
+        }
+
+        .nav-auth .signup:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
+        }
+
+        .nav-toggle {
+          display: none;
+        }
+
+        @keyframes wave {
+
+          0%,
+          100% {
+            transform: rotate(0deg);
+          }
+
+          25% {
+            transform: rotate(-10deg);
+          }
+
+          75% {
+            transform: rotate(10deg);
+          }
+        }
+
+        @keyframes slideDown {
+          from {
+            transform: translateY(-10px);
+            opacity: 0;
+          }
+
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+          .nav-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.3s ease forwards;
+          }
+
+          .nav-menu.active {
+            display: flex;
+          }
+
+          .nav-links {
+            flex-direction: column;
+            width: 100%;
+            gap: 1rem;
+          }
+
+          .nav-auth {
+            margin: 0;
+            padding: 1rem 0 0 0;
+            border-left: none;
+            border-top: 2px solid #eee;
+            flex-direction: column;
+            width: 100%;
+            gap: 1rem;
+          }
+
+          .nav-auth .signup {
+            text-align: center;
+            width: 100%;
+          }
+
+          .nav-toggle {
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+          }
+
+          .hamburger {
+            display: block;
+            position: relative;
+            width: 24px;
+            height: 2px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+          }
+
+          .hamburger::before,
+          .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+          }
+
+          .hamburger::before {
+            top: -6px;
+          }
+
+          .hamburger::after {
+            bottom: -6px;
+          }
+
+          .nav-toggle.active .hamburger {
+            background: transparent;
+          }
+
+          .nav-toggle.active .hamburger::before {
+            top: 0;
+            transform: rotate(45deg);
+          }
+
+          .nav-toggle.active .hamburger::after {
+            bottom: 0;
+            transform: rotate(-45deg);
+          }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+          body {
+            background-color: #121212;
+          }
+
+          .navbar {
+            background: rgba(18, 18, 18, 0.98);
+          }
+
+          .nav-link {
+            color: #fff;
+          }
+
+          .nav-auth {
+            border-left-color: #333;
+          }
+
+          .hamburger,
+          .hamburger::before,
+          .hamburger::after {
+            background: #fff;
+          }
+
+          @media (max-width: 768px) {
+            .nav-menu {
+              background: rgba(18, 18, 18, 0.98);
+            }
+
+            .nav-auth {
+              border-top-color: #333;
+            }
+          }
+        }
+
+        .theme-toggle {
+          background: none;
+          border: none;
+          padding: 0.8rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          transition: all 0.3s ease;
+          position: relative;
+          margin-left: 1rem;
+        }
+
+        .theme-toggle:hover {
+          background: rgba(33, 150, 243, 0.1);
+          transform: scale(1.1);
+        }
+
+        .theme-toggle-icon {
+          font-size: 1.2rem;
+          transition: all 0.5s ease;
+        }
+
+        .theme-toggle[data-theme="dark"] .theme-toggle-icon {
+          transform: rotate(360deg);
+        }
+
+        /* Add smooth transition for theme changes */
+        * {
+          transition: background-color 0.3s ease,
+            color 0.3s ease,
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
+        }
+
+        .theme-toggle-animation {
+          animation: rotate-icon 0.5s ease-in-out;
+        }
+
+        .theme-toggle-press {
+          transform: scale(0.95);
+        }
+
+        @keyframes rotate-icon {
+          0% {
+            transform: rotate(0deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        /* Smooth transitions for all theme changes */
+        * {
+          transition: background-color 0.3s ease,
+            color 0.3s ease,
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
+        }
+      </style>
+
+      <script>
+        const navbar = document.querySelector('.navbar');
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        // Hide navbar on scroll down, show on scroll up
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset;
+          if (currentScroll <= 0) {
+            navbar.style.transform = 'translateY(0)';
+            return;
+          }
+
+          if (currentScroll > lastScroll && !navMenu.classList.contains('active')) {
+            navbar.style.transform = 'translateY(-100%)';
+          } else {
+            navbar.style.transform = 'translateY(0)';
+          }
+          lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        navToggle.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+          navToggle.classList.toggle('active');
+
+          if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+          } else {
+            document.body.style.overflow = '';
+          }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      </script>
 </head>
-<body>
-  <nav>
-    <h1><a href="/">Blog Platform</a></h1>
-    <ul>
-      <li><a href="/about">About</a></li>
-      <li><a href="/login">Log in</a></li>
-      <li><a href="/signup" class="btn">Sign up</a></li>
-    </ul>
-  </nav>
-   -->
-<!-- <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Ninja | <%= title %></title>
-  <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-  <nav>
-    <h1><a href="/">Blog Platform</a></h1>
-    <ul>
-      <li><a href="/about">About</a></li>
-      <li><a href="/logout">Log out</a></li>
-      <li><a href="/login">Log in</a></li>
-      <li><a href="/signup" class="btn">Sign up</a></li>
-    </ul>
-  </nav>
-</body>
-</html> -->
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Ninja | <%= title %></title>
-  <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-  <nav>
-    <h1><a href="/">Blog Platform</a></h1>
-    <ul>
-      <% if (user) { %>
-        <li>Welcome, <%= user.email %></li>
-        <li><a href="/logout">Log out</a></li>
-      <% } else { %>
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/signup" class="btn">Sign up</a></li>
-      <% } %>
-    </ul>
-  </nav>
-</body>
-</html>

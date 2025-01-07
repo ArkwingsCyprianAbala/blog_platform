@@ -1,0 +1,549 @@
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="/" class="logo">
+                <span class="logo-icon">✍️</span>
+                <span class="logo-text">BlogSpace</span>
+            </a>
+        </div>
+
+        <div class="nav-search desktop-only">
+            <div class="search-wrapper">
+                <input type="search" placeholder="Search blogs, writers..." class="search-input" id="searchInput">
+                <button class="search-button">
+                    <span class="search-icon">🔍</span>
+                </button>
+                <div class="search-results" id="searchResults">
+                    <div class="results-categories">
+                        <div class="result-category">
+                            <h3>Blogs</h3>
+                            <div class="blog-results"></div>
+                        </div>
+                        <div class="result-category">
+                            <h3>Writers</h3>
+                            <div class="writer-results"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-search-btn">
+            <button class="mobile-search-toggle">
+                <span class="search-icon">🔍</span>
+            </button>
+        </div>
+
+        <div class="nav-menu">
+            <div class="nav-links">
+                <a href="/home" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    Home
+                </a>
+                <a href="/blogs" class="nav-link">
+                    <span class="nav-icon">📚</span>
+                    Blogs
+                </a>
+                <a href="/blogs/create" class="nav-link">
+                    <span class="nav-icon">✨</span>
+                    Write
+                </a>
+                <a href="/about" class="nav-link">
+                    <span class="nav-icon">ℹ️</span>
+                    About
+                </a>
+            </div>
+
+            <div class="nav-auth">
+                <a href="/login" class="nav-link login">Login</a>
+                <a href="/signup" class="nav-link signup">Sign Up</a>
+            </div>
+        </div>
+
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span class="hamburger"></span>
+        </button>
+    </div>
+
+    <div class="mobile-search-overlay">
+        <div class="mobile-search-header">
+            <div class="mobile-search-wrapper">
+                <input type="search" placeholder="Search blogs, writers..." class="mobile-search-input"
+                    id="mobileSearchInput">
+                <button class="mobile-search-close">✕</button>
+            </div>
+        </div>
+        <div class="mobile-search-results" id="mobileSearchResults"></div>
+    </div>
+</nav>
+
+<style>
+    .nav-search {
+        flex: 1;
+        max-width: 600px;
+        margin: 0 2rem;
+        position: relative;
+    }
+
+    .search-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        padding-right: 3rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50px;
+        color: #fff;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(100, 181, 246, 0.5);
+        box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
+    }
+
+    .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .search-button {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        padding: 0.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .search-button:hover {
+        color: #64B5F6;
+    }
+
+    .search-results {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0;
+        right: 0;
+        background: rgba(45, 45, 45, 0.95);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: none;
+        z-index: 1000;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .results-categories {
+        padding: 1rem;
+    }
+
+    .result-category {
+        margin-bottom: 1rem;
+    }
+
+    .result-category h3 {
+        color: #64B5F6;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .result-item {
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .result-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .result-icon {
+        font-size: 1.2rem;
+        opacity: 0.8;
+    }
+
+    .result-content {
+        flex: 1;
+    }
+
+    .result-title {
+        color: #fff;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+    }
+
+    .result-subtitle {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .nav-search {
+            display: none;
+        }
+
+        .mobile-search-toggle {
+            display: block;
+            margin-right: 1rem;
+        }
+
+        .mobile-search-overlay.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+    }
+
+    .mobile-search-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        padding: 0.8rem;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+
+    .mobile-search-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(25, 25, 25, 0.98);
+        z-index: 2000;
+        display: none;
+        padding: 1rem;
+    }
+
+    .mobile-search-wrapper {
+        position: relative;
+        margin-top: 1rem;
+    }
+
+    .mobile-search-input {
+        width: 100%;
+        padding: 1rem;
+        padding-right: 3rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    .mobile-search-close {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .mobile-search-results {
+        margin-top: 1rem;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .desktop-only {
+        display: block;
+    }
+
+    .mobile-search-btn {
+        display: none;
+    }
+
+    .mobile-search-toggle {
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-search-toggle:hover {
+        color: #64B5F6;
+    }
+
+    .mobile-search-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(25, 25, 25, 0.98);
+        z-index: 2000;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .mobile-search-header {
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-search-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .mobile-search-input {
+        width: 100%;
+        padding: 1rem 3rem 1rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    .mobile-search-close {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .mobile-search-results {
+        padding: 1rem;
+        overflow-y: auto;
+        max-height: calc(100vh - 80px);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .desktop-only {
+            display: none;
+        }
+
+        .mobile-search-btn {
+            display: block;
+            margin-right: 1rem;
+        }
+
+        .mobile-search-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .nav-container {
+            padding: 0.5rem 1rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const blogResults = document.querySelector('.blog-results');
+        const writerResults = document.querySelector('.writer-results');
+        let searchTimeout;
+
+        searchInput.addEventListener('focus', () => {
+            searchResults.style.display = 'block';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        searchInput.addEventListener('input', function () {
+            clearTimeout(searchTimeout);
+            const query = this.value.trim();
+
+            if (query.length > 2) {
+                searchTimeout = setTimeout(() => {
+                    fetch(`/api/search?q=${encodeURIComponent(query)}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            updateSearchResults(data);
+                        })
+                        .catch(err => console.error('Search error:', err));
+                }, 300);
+            }
+        });
+
+        function updateSearchResults(data) {
+            blogResults.innerHTML = data.blogs?.map(blog => `
+                <div class="result-item">
+                    <span class="result-icon">📝</span>
+                    <div class="result-content">
+                        <div class="result-title">${blog.title}</div>
+                        <div class="result-subtitle">by ${blog.author}</div>
+                    </div>
+                </div>
+            `).join('') || '<div class="no-results">No blogs found</div>';
+
+            writerResults.innerHTML = data.writers?.map(writer => `
+                <div class="result-item">
+                    <span class="result-icon">👤</span>
+                    <div class="result-content">
+                        <div class="result-title">${writer.name}</div>
+                        <div class="result-subtitle">${writer.blogCount} blogs</div>
+                    </div>
+                </div>
+            `).join('') || '<div class="no-results">No writers found</div>';
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const mobileSearchToggle = document.querySelector('.mobile-search-toggle');
+        const mobileSearchOverlay = document.querySelector('.mobile-search-overlay');
+        const mobileSearchClose = document.querySelector('.mobile-search-close');
+        const mobileSearchInput = document.getElementById('mobileSearchInput');
+        const mobileSearchResults = document.getElementById('mobileSearchResults');
+
+        if (mobileSearchToggle && mobileSearchOverlay && mobileSearchClose) {
+            mobileSearchToggle.addEventListener('click', () => {
+                mobileSearchOverlay.classList.add('active');
+                mobileSearchInput.focus();
+                document.body.style.overflow = 'hidden';
+            });
+
+            mobileSearchClose.addEventListener('click', () => {
+                mobileSearchOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                mobileSearchInput.value = '';
+            });
+
+            let mobileSearchTimeout;
+            mobileSearchInput.addEventListener('input', function () {
+                clearTimeout(mobileSearchTimeout);
+                const query = this.value.trim();
+
+                if (query.length > 2) {
+                    mobileSearchTimeout = setTimeout(() => {
+                        fetch(`/api/search?q=${encodeURIComponent(query)}`)
+                            .then(res => res.json())
+                            .then(data => {
+                                updateMobileSearchResults(data);
+                            })
+                            .catch(err => console.error('Search error:', err));
+                    }, 300);
+                }
+            });
+        }
+
+        function updateMobileSearchResults(data) {
+            if (!mobileSearchResults) return;
+
+            mobileSearchResults.innerHTML = `
+                <div class="result-category">
+                    <h3>Blogs</h3>
+                    ${data.blogs?.map(blog => `
+                        <div class="result-item">
+                            <span class="result-icon">📝</span>
+                            <div class="result-content">
+                                <div class="result-title">${blog.title}</div>
+                                <div class="result-subtitle">by ${blog.author}</div>
+                            </div>
+                        </div>
+                    `).join('') || '<div class="no-results">No blogs found</div>'}
+                </div>
+                <div class="result-category">
+                    <h3>Writers</h3>
+                    ${data.writers?.map(writer => `
+                        <div class="result-item">
+                            <span class="result-icon">👤</span>
+                            <div class="result-content">
+                                <div class="result-title">${writer.name}</div>
+                                <div class="result-subtitle">${writer.blogCount} blogs</div>
+                            </div>
+                        </div>
+                    `).join('') || '<div class="no-results">No writers found</div>'}
+                </div>
+            `;
+        }
+    });
+</script>
+
+<script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const body = document.querySelector('body');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+
+                // Prevent body scroll when menu is open
+                if (navMenu.classList.contains('active')) {
+                    body.style.overflow = 'hidden';
+                } else {
+                    body.style.overflow = '';
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            });
+
+            // Close menu when clicking a link
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    body.style.overflow = '';
+                });
+            });
+        }
+    });
+</script>
