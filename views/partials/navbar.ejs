@@ -55,8 +55,21 @@
             </div>
 
             <div class="nav-auth">
-                <a href="/login" class="nav-link login">Login</a>
-                <a href="/signup" class="nav-link signup">Sign Up</a>
+                <% if (locals.user) { %>
+                    <div class="user-info">
+                        <span class="nav-icon">👤</span>
+                        <span class="username">
+                            <%= user.username || user.name %>
+                        </span>
+                    </div>
+                    <a href="/logout" class="nav-link logout">
+                        <span class="nav-icon">🚪</span>
+                        Logout
+                    </a>
+                    <% } else { %>
+                        <a href="/login" class="nav-link login">Login</a>
+                        <a href="/signup" class="nav-link signup">Sign Up</a>
+                        <% } %>
             </div>
         </div>
 
@@ -76,7 +89,6 @@
         <div class="mobile-search-results" id="mobileSearchResults"></div>
     </div>
 </nav>
-
 <style>
     .nav-search {
         flex: 1;
@@ -375,6 +387,41 @@
 
         .nav-container {
             padding: 0.5rem 1rem;
+        }
+    }
+
+    .logout {
+        color: #ff4444;
+        transition: color 0.3s ease;
+    }
+
+    .logout:hover {
+        color: #ff6666;
+    }
+
+    .nav-icon {
+        margin-right: 0.5rem;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        margin-right: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        color: #fff;
+    }
+
+    .username {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+        .user-info {
+            margin-right: 0.5rem;
+            padding: 0.4rem 0.8rem;
         }
     }
 </style>

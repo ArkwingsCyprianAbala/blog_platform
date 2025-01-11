@@ -1,366 +1,384 @@
 <%- include('./partials/head.ejs') %>
 
-  <div class="signup-container">
-    <div class="animated-background">
-      <div class="gradient-orb"></div>
-      <div class="gradient-orb"></div>
-      <div class="gradient-orb"></div>
-    </div>
-
-    <div class="signup-box">
-      <div class="signup-header">
-        <div class="signup-badge">✨ Join BlogSpace</div>
-        <h2>Create Your Account</h2>
-        <p>Start your journey with our community</p>
-      </div>
-
-      <form action="/signup" class="signup-form">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <div class="input-wrapper">
-            <span class="input-icon">👤</span>
-            <input type="text" name="username" placeholder="Choose a username" />
-          </div>
-          <div class="username error"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email</label>
-          <div class="input-wrapper">
-            <span class="input-icon">📧</span>
-            <input type="email" name="email" placeholder="Enter your email" />
-          </div>
-          <div class="email error"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <div class="input-wrapper">
-            <span class="input-icon">🔒</span>
-            <input type="password" name="password" placeholder="Create a password" />
-            <button type="button" class="toggle-password">👁️</button>
-          </div>
-          <div class="password error"></div>
-        </div>
-
-        <div class="form-options">
-          <label class="terms">
-            <input type="checkbox" name="terms">
-            <span>I agree to the <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a></span>
-          </label>
-        </div>
-
-        <button class="signup-button">
-          <span class="button-text">Create Account</span>
-          <span class="button-icon">→</span>
-        </button>
-
-        <div class="social-signup">
-          <p>Or sign up with</p>
-          <div class="social-buttons">
-            <button type="button" class="social-button google">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24">
-                <path fill="#4285F4"
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                <path fill="#34A853"
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                <path fill="#FBBC05"
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                <path fill="#EA4335"
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-              </svg>
-            </button>
-            <button type="button" class="social-button github">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                  d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="form-footer">
-          <p>Already have an account? <a href="/login">Login</a></p>
-        </div>
-      </form>
-    </div>
-
-    <div class="signup-image">
-      <div class="floating-cards">
-        <div class="info-card" style="--delay: 0s">
-          <span class="card-icon">✍️</span>
-          <div class="card-content">
-            <h4>Write & Share</h4>
-            <p>Express your thoughts</p>
-          </div>
-        </div>
-        <div class="info-card" style="--delay: 0.2s">
-          <span class="card-icon">🌟</span>
-          <div class="card-content">
-            <h4>Get Discovered</h4>
-            <p>Reach global readers</p>
-          </div>
-        </div>
-        <div class="info-card" style="--delay: 0.4s">
-          <span class="card-icon">🤝</span>
-          <div class="card-content">
-            <h4>Join Community</h4>
-            <p>Connect with writers</p>
-          </div>
-        </div>
-      </div>
-      <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643" alt="Creative workspace">
-    </div>
-  </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* Use the same styles as login.ejs but replace 'login' with 'signup' in class names */
+    /* Reset styles for signup page only */
+    .signup-page {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Adjust container to fit between navbar and footer */
     .signup-container {
+      position: relative;
+      z-index: 1;
+      /* Keep below navbar if it's fixed */
+      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.85)),
+        url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&q=90');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
       display: flex;
-      min-height: 100vh;
-      position: relative;
-      padding-top: 70px;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    }
-
-    .signup-box {
-      flex: 1;
-      max-width: 500px;
-      margin: 2rem;
-      padding: 3rem;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-      position: relative;
-      z-index: 2;
-      animation: fadeInScale 0.8s ease-out;
-    }
-
-    .signup-image {
-      flex: 1;
-      position: relative;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      margin-top: var(--navbar-height);
+      /* Add if navbar is fixed */
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .signup-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .form-group {
-      margin-bottom: 2rem;
-    }
-
-    .input-wrapper {
-      margin-top: 0.8rem;
-      position: relative;
-    }
-
-    .input-wrapper input {
-      width: 100%;
-      padding: 1rem 3rem;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-
-    .input-wrapper input:focus {
-      outline: none;
-      border-color: #2196F3;
-      box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.1);
-    }
-
-    .terms {
-      margin: 2rem 0;
-      padding: 1rem;
-      background: rgba(33, 150, 243, 0.05);
-      border-radius: 12px;
-      border: 1px solid rgba(33, 150, 243, 0.1);
-    }
-
-    .social-signup {
-      margin-top: 3rem;
-      position: relative;
-      text-align: center;
-    }
-
-    .social-signup p {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .social-signup p::before,
-    .social-signup p::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    .social-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-
-    .form-footer {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .floating-cards {
+    /* Scope particles to signup container */
+    .signup-container .particles {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
+      z-index: 1;
+    }
+
+    /* More specific selectors for all form elements */
+    .signup-container .signup-form {
+      width: 100%;
+      max-width: 460px;
+      padding: 45px 40px;
+      border-radius: 20px;
+      background: rgba(30, 41, 59, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      position: relative;
       z-index: 2;
+      animation: formFloat 0.8s ease-out;
     }
 
-    .info-card {
+    @keyframes formFloat {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .signup-container .signup-form h2 {
+      margin-bottom: 40px;
+      font-size: 2.6em;
+      color: #fff;
+      text-align: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .signup-container .signup-form h2::after {
+      content: '';
       position: absolute;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 1.5rem;
-      width: 280px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-      animation: cardFloat 6s ease-in-out infinite;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #c7a9ff, #93c5fd);
+      border-radius: 2px;
     }
 
-    .info-card:nth-child(1) {
-      top: 20%;
-      right: 10%;
+    .signup-container .signup-form h2::before {
+      content: '📚';
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.2em;
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
     }
 
-    .info-card:nth-child(2) {
-      top: 45%;
-      right: 5%;
+    .signup-container .form-group {
+      position: relative;
+      margin-bottom: 32px;
     }
 
-    .info-card:nth-child(3) {
-      top: 70%;
-      right: 15%;
+    .signup-container .form-group i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      pointer-events: none;
     }
 
-    /* Responsive Design */
-    @media (max-width: 1200px) {
-      .signup-box {
-        margin: 2rem auto;
+    .signup-container .form-group input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      letter-spacing: 0.5px;
+      color: #fff;
+      transition: all 0.3s ease;
+      padding-left: 50px;
+    }
+
+    .signup-container .form-group input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .signup-container .form-group input:focus {
+      outline: none;
+      background: rgba(15, 23, 42, 0.6);
+      border-color: #c7a9ff;
+      box-shadow: 0 0 20px rgba(199, 169, 255, 0.2);
+    }
+
+    .signup-container .form-group input:focus+i {
+      color: #c7a9ff;
+    }
+
+    .signup-container .error {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ff8a8a;
+      font-size: 0.85em;
+      margin-top: 8px;
+      padding-left: 4px;
+    }
+
+    .signup-container .error i {
+      font-size: 0.9em;
+    }
+
+    .signup-container button {
+      width: 100%;
+      background: linear-gradient(135deg, #c7a9ff 0%, #93c5fd 100%);
+      padding: 18px;
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1.2em;
+      font-family: 'Playfair Display', Georgia, serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .signup-container button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(199, 169, 255, 0.4);
+    }
+
+    .signup-container button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent);
+      transform: rotate(45deg);
+      transition: 0.8s;
+      opacity: 0;
+    }
+
+    .signup-container button:hover::after {
+      opacity: 1;
+      transform: rotate(45deg) translate(50%, 50%);
+    }
+
+    .signup-container .signup-form button i {
+      font-size: 1.1em;
+      transition: transform 0.3s ease;
+    }
+
+    .signup-container .signup-form button:hover i {
+      transform: translateX(5px);
+    }
+
+    .signup-container .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
       }
 
-      .signup-image {
-        display: none;
+      50% {
+        opacity: 0.5;
       }
 
-      .info-card {
-        display: none;
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
       }
     }
 
-    @media (max-width: 768px) {
-      .signup-box {
-        margin: 1rem;
-        padding: 2rem;
-        max-width: none;
-      }
-    }
-
-    /* Dark Mode */
-    @media (prefers-color-scheme: dark) {
-      .signup-box {
-        background: rgba(30, 35, 40, 0.95);
-        color: #fff;
+    @media (max-width: 480px) {
+      .signup-container {
+        padding: 40px 20px;
       }
 
-      .input-wrapper input {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
-        color: #fff;
+      .signup-container .signup-form {
+        padding: 35px 25px;
       }
 
-      .terms {
-        background: rgba(33, 150, 243, 0.1);
-        color: #a0a0a0;
+      .signup-container .signup-form h2 {
+        font-size: 2.2em;
       }
 
-      .social-signup p::before,
-      .social-signup p::after {
-        background: rgba(255, 255, 255, 0.1);
+      .signup-container .form-group input {
+        padding: 14px 16px;
+        font-size: 1em;
       }
 
-      .form-footer {
-        border-color: rgba(255, 255, 255, 0.1);
+      .signup-container button {
+        padding: 16px;
+        font-size: 1.1em;
       }
     }
   </style>
 
   <script>
-    // Password toggle functionality
-    const togglePassword = document.querySelector('.toggle-password');
-    const passwordInput = document.querySelector('input[type="password"]');
+    // Calculate and set navbar and footer heights
+    document.documentElement.style.setProperty(
+      '--navbar-height',
+      document.querySelector('nav').offsetHeight + 'px'
+    );
 
-    togglePassword.addEventListener('click', () => {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-      togglePassword.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
-    });
-
-    // Form validation and submission
-    const form = document.querySelector('form');
-    const usernameError = document.querySelector('.username.error');
-    const emailError = document.querySelector('.email.error');
-    const passwordError = document.querySelector('.password.error');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      // Reset errors
-      usernameError.textContent = '';
-      emailError.textContent = '';
-      passwordError.textContent = '';
-
-      // Get values
-      const username = form.username.value;
-      const email = form.email.value;
-      const password = form.password.value;
-
-      try {
-        const res = await fetch('/signup', {
-          method: 'POST',
-          body: JSON.stringify({ username, email, password }),
-          headers: { 'Content-Type': 'application/json' }
-        });
-        const data = await res.json();
-
-        if (data.errors) {
-          usernameError.textContent = data.errors.username;
-          emailError.textContent = data.errors.email;
-          passwordError.textContent = data.errors.password;
-        }
-        if (data.user) {
-          location.assign('/');
-        }
-      }
-      catch (err) {
-        console.log(err);
-      }
-    });
+    document.documentElement.style.setProperty(
+      '--footer-height',
+      document.querySelector('footer').offsetHeight + 'px'
+    );
   </script>
 
-  <%- include('./partials/footer.ejs') %>
+  <div class="signup-page">
+    <%- include('./partials/navbar.ejs') %>
+
+      <div class="signup-container">
+        <div class="particles">
+          <!-- Particles will be added by JavaScript -->
+        </div>
+        <form class="signup-form">
+          <h2>Sign Up</h2>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Enter your username" required>
+            <i class="fas fa-user"></i>
+            <div class="username error">
+              <i class="fas fa-exclamation-circle"></i>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <i class="fas fa-envelope"></i>
+            <div class="email error">
+              <i class="fas fa-exclamation-circle"></i>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Choose a password" required>
+            <i class="fas fa-lock"></i>
+            <div class="password error">
+              <i class="fas fa-exclamation-circle"></i>
+              <span></span>
+            </div>
+          </div>
+
+          <button>
+            Sign Up
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+
+      <script>
+        const form = document.querySelector('.signup-form');
+        const usernameError = document.querySelector('.username.error');
+        const emailError = document.querySelector('.email.error');
+        const passwordError = document.querySelector('.password.error');
+
+
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          // Reset errors
+          usernameError.textContent = '';
+          emailError.textContent = '';
+          passwordError.textContent = '';
+
+          // Get values
+          const username = form.username.value;
+          const email = form.email.value;
+          const password = form.password.value;
+
+          try {
+            const res = await fetch('/signup', {
+              method: 'POST',
+              body: JSON.stringify({ username, email, password }),
+              headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+
+            if (data.errors) {
+              usernameError.textContent = data.errors.username;
+              emailError.textContent = data.errors.email;
+              passwordError.textContent = data.errors.password;
+            }
+            if (data.user) {
+              location.assign('/');
+            }
+          }
+          catch (err) {
+            console.log(err);
+          }
+        });
+
+        // Create floating particles
+        const particles = document.querySelector('.particles');
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.animationDelay = Math.random() * 15 + 's';
+          particle.style.opacity = Math.random() * 0.5;
+          particles.appendChild(particle);
+        }
+      </script>
+
+      <%- include('./partials/footer.ejs') %>
+  </div>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">

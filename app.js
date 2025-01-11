@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { result } = require('lodash');
 const blogRoutes = require('./routes/blogRoutes');
+const authRoutes = require('./routes/authRoutes');
+const cookieParser = require('cookie-parser');
+const { checkUser } = require('./middleware/authMiddleware');
 
 // express app
 const app = express();
@@ -9,6 +12,8 @@ const app = express();
 // middleware & static files
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(cookieParser());
 
 // connect to mongodb
 const dbURI = 'mongodb://localhost:27017/blog';
@@ -22,6 +27,8 @@ app.set('view engine', 'ejs');
 //listen for requests
 //app.listen(3000);
 
+app.get('*', checkUser);
+
 app.get('/home', (req, res) => {
     res.render('./blogs/home', { root: __dirname});
 });
@@ -32,6 +39,9 @@ app.get('/about', (req, res) => {
 
 //blog routes
 app.use(blogRoutes);
+
+//app routes
+app.use(authRoutes);
 
 // 404 page - must be last
 app.use((req, res) => {
