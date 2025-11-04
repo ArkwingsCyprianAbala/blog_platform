@@ -3,7 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
   <title>
     <%= typeof title !=='undefined' ? title : 'Blog Platform' %>
   </title>
@@ -50,6 +54,10 @@
           color: var(--text-primary);
           transition: background-color 0.3s ease, color 0.3s ease;
           min-height: 100vh;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
         }
 
         .navbar {
@@ -217,10 +225,11 @@
         @media (max-width: 768px) {
           .nav-menu {
             display: none;
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 70px;
             left: 0;
             right: 0;
+            bottom: 0;
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             backdrop-filter: blur(10px);
             padding: 1.5rem;
@@ -228,6 +237,9 @@
             gap: 1.5rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             animation: slideDown 0.3s ease forwards;
+            overflow-y: auto;
+            z-index: 999;
+            -webkit-overflow-scrolling: touch;
           }
 
           .nav-menu.active {
@@ -240,11 +252,22 @@
             gap: 1rem;
           }
 
+          .nav-link {
+            padding: 1rem;
+            border-radius: 8px;
+            width: 100%;
+            text-align: left;
+          }
+
+          .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+
           .nav-auth {
             margin: 0;
             padding: 1rem 0 0 0;
             border-left: none;
-            border-top: 2px solid #eee;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
             flex-direction: column;
             width: 100%;
             gap: 1rem;
@@ -253,15 +276,26 @@
           .nav-auth .signup {
             text-align: center;
             width: 100%;
+            padding: 1rem;
+          }
+
+          .nav-auth .login {
+            text-align: center;
+            width: 100%;
+            padding: 1rem;
           }
 
           .nav-toggle {
-            display: block;
+            display: flex;
             background: none;
             border: none;
             cursor: pointer;
             padding: 0.5rem;
             transition: all 0.3s ease;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
           }
 
           .hamburger {
@@ -284,11 +318,11 @@
           }
 
           .hamburger::before {
-            top: -6px;
+            top: -8px;
           }
 
           .hamburger::after {
-            bottom: -6px;
+            bottom: -8px;
           }
 
           .nav-toggle.active .hamburger {
@@ -303,6 +337,37 @@
           .nav-toggle.active .hamburger::after {
             bottom: 0;
             transform: rotate(-45deg);
+          }
+
+          .nav-container {
+            flex-wrap: nowrap;
+          }
+
+          .logo-text {
+            font-size: 1.2rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .nav-menu {
+            top: 60px;
+            padding: 1rem;
+            gap: 1rem;
+          }
+
+          .nav-link {
+            padding: 0.875rem;
+            font-size: 0.95rem;
+          }
+
+          .nav-auth .signup,
+          .nav-auth .login {
+            padding: 0.875rem;
+            font-size: 0.95rem;
+          }
+
+          .logo-text {
+            font-size: 1rem;
           }
         }
 

@@ -387,6 +387,46 @@
 
         .nav-container {
             padding: 0.5rem 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-brand .logo-text {
+            font-size: 1.2rem;
+        }
+
+        .nav-brand .logo-icon {
+            font-size: 1.3rem;
+        }
+
+        .mobile-search-input {
+            font-size: 16px; /* Prevents zoom on iOS */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .nav-container {
+            padding: 0.5rem 0.75rem;
+        }
+
+        .nav-brand .logo-text {
+            font-size: 1rem;
+        }
+
+        .nav-brand .logo-icon {
+            font-size: 1.1rem;
+        }
+
+        .mobile-search-overlay {
+            padding: 0.75rem;
+        }
+
+        .mobile-search-header {
+            padding: 0.75rem;
+        }
+
+        .mobile-search-input {
+            padding: 0.875rem 2.5rem 0.875rem 0.875rem;
+            font-size: 16px;
         }
     }
 
@@ -411,17 +451,41 @@
         background: rgba(255, 255, 255, 0.1);
         border-radius: 20px;
         color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .username {
         font-size: 0.9rem;
         font-weight: 500;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     @media (max-width: 768px) {
         .user-info {
             margin-right: 0.5rem;
             padding: 0.4rem 0.8rem;
+            max-width: 120px;
+        }
+
+        .username {
+            max-width: 80px;
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .user-info {
+            max-width: 100px;
+            padding: 0.35rem 0.65rem;
+        }
+
+        .username {
+            max-width: 60px;
+            font-size: 0.8rem;
         }
     }
 </style>

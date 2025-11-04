@@ -14,6 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Navigation Bar */
@@ -33,6 +34,7 @@ nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 nav ul li {
@@ -43,6 +45,7 @@ nav a {
   color: #fff;
   text-decoration: none;
   padding: 7px 12px;
+  display: inline-block;
 }
 
 nav a.btn {
@@ -101,6 +104,7 @@ nav a.btn:hover {
   max-width: 800px;
   margin: 0 auto;
   flex: 1;
+  width: 100%;
 }
 
 /* Create Blog Form */
@@ -110,6 +114,7 @@ nav a.btn:hover {
   padding: 30px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   margin-top: 40px;
+  width: 100%;
 }
 
 .create-blog form {
@@ -130,6 +135,7 @@ nav a.btn:hover {
   padding: 12px;
   font-size: 1rem;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .create-blog textarea {
@@ -146,6 +152,8 @@ nav a.btn:hover {
   cursor: pointer;
   font-size: 1rem;
   transition: background 0.3s ease;
+  width: 100%;
+  max-width: 200px;
 }
 
 .create-blog button:hover {
@@ -163,16 +171,19 @@ nav a.btn:hover {
   flex-direction: row;
   align-items: flex-start;
   gap: 20px;
+  width: 100%;
 }
 
 .details h2 {
   font-size: 2.5rem;
   color: #333;
   margin-bottom: 20px;
+  word-wrap: break-word;
 }
 
 .details .content {
   flex: 1;
+  padding: 0;
 }
 
 .details .content p {
@@ -180,6 +191,8 @@ nav a.btn:hover {
   font-size: 1.1rem;
   color: #333;
   margin-bottom: 30px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .details a.delete {
@@ -205,11 +218,13 @@ nav a.btn:hover {
   padding: 30px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   margin-top: 40px;
+  width: 100%;
 }
 
 .blogs h2 {
   font-size: 2rem;
   margin-bottom: 20px;
+  word-wrap: break-word;
 }
 
 .blogs h2 a {
@@ -219,6 +234,7 @@ nav a.btn:hover {
   border-radius: 5px;
   text-decoration: none;
   transition: background 0.3s ease;
+  display: inline-block;
 }
 
 .blogs h2 a:hover {
@@ -245,11 +261,13 @@ nav a.btn:hover {
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 .blogs .snippet {
   font-size: 1.1rem;
   color: #555;
+  word-wrap: break-word;
 }
 
 /* No Blogs Message */
@@ -268,11 +286,13 @@ form {
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 form h2 {
   margin-bottom: 25px;
   font-size: 2rem;
+  word-wrap: break-word;
 }
 
 form label {
@@ -287,6 +307,7 @@ form input {
   margin-bottom: 25px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 form button {
@@ -297,6 +318,7 @@ form button {
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
+  width: 100%;
 }
 
 form button:hover {
@@ -307,6 +329,7 @@ form .error {
   color: #e74c3c;
   font-size: 0.9rem;
   margin-bottom: 15px;
+  word-wrap: break-word;
 }
 
 /* Footer */
@@ -328,24 +351,291 @@ form .error {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .header {
     padding: 60px 20px;
   }
 
   .header h2.main-heading {
-    font-size: 2.7rem;
+    font-size: 2.8rem;
   }
 
   .header h3.sub-heading {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .details {
-    flex-direction: column;
+    padding: 25px;
   }
 
+  .content {
+    padding: 25px 20px;
+  }
+
+  nav ul {
+    gap: 15px;
+  }
+
+  nav ul li {
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Navigation */
+  nav {
+    padding: 12px 15px;
+  }
+
+  nav h1 {
+    font-size: 1.5rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  nav ul li {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    padding: 10px;
+    width: 100%;
+  }
+
+  /* Header */
+  .header {
+    padding: 40px 15px;
+  }
+
+  .header h2.main-heading {
+    font-size: 2rem;
+  }
+
+  .header h3.sub-heading {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+
+  .header a.btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    margin-top: 20px;
+  }
+
+  /* Content */
+  .content {
+    padding: 20px 15px;
+  }
+
+  /* Create Blog */
+  .create-blog {
+    padding: 20px 15px;
+    margin-top: 20px;
+  }
+
+  .create-blog label {
+    font-size: 1rem;
+  }
+
+  .create-blog input[type="text"],
+  .create-blog textarea {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  /* Details */
+  .details {
+    flex-direction: column;
+    padding: 20px 15px;
+    gap: 15px;
+  }
+
+  .details h2 {
+    font-size: 1.8rem;
+  }
+
+  .details .content p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .details a.delete {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
+
+  /* Blogs */
+  .blogs {
+    padding: 20px 15px;
+    margin-top: 20px;
+  }
+
+  .blogs h2 {
+    font-size: 1.5rem;
+  }
+
+  .blogs .title {
+    font-size: 1.4rem;
+  }
+
+  .blogs .snippet {
+    font-size: 1rem;
+  }
+
+  /* Forms */
   form {
-    padding: 20px;
+    padding: 20px 15px;
+    margin: 20px 15px;
+  }
+
+  form h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  form input {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  form button {
+    padding: 12px;
+  }
+
+  /* Not Found */
+  .not-found {
+    padding: 40px 20px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Navigation */
+  nav {
+    padding: 10px 12px;
+  }
+
+  nav h1 {
+    font-size: 1.3rem;
+  }
+
+  /* Header */
+  .header {
+    padding: 30px 12px;
+  }
+
+  .header h2.main-heading {
+    font-size: 1.6rem;
+  }
+
+  .header h3.sub-heading {
+    font-size: 1rem;
+  }
+
+  /* Content */
+  .content {
+    padding: 15px 12px;
+  }
+
+  /* Create Blog */
+  .create-blog {
+    padding: 15px 12px;
+    border-radius: 5px;
+  }
+
+  .create-blog textarea {
+    min-height: 120px;
+  }
+
+  /* Details */
+  .details {
+    padding: 15px 12px;
+    border-radius: 5px;
+  }
+
+  .details h2 {
+    font-size: 1.5rem;
+  }
+
+  .details .content p {
+    font-size: 0.95rem;
+  }
+
+  /* Blogs */
+  .blogs {
+    padding: 15px 12px;
+    border-radius: 5px;
+  }
+
+  .blogs h2 {
+    font-size: 1.3rem;
+  }
+
+  .blogs .title {
+    font-size: 1.2rem;
+  }
+
+  .blogs .snippet {
+    font-size: 0.95rem;
+  }
+
+  .blogs a.single {
+    padding: 15px;
+  }
+
+  /* Forms */
+  form {
+    padding: 15px 12px;
+    margin: 15px 12px;
+    border-radius: 5px;
+  }
+
+  form h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Not Found */
+  .not-found {
+    padding: 30px 15px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .header {
+    padding: 30px 20px;
+  }
+
+  .hero-content {
+    padding: 1.5rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  nav,
+  .footer {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .content,
+  .details,
+  .blogs {
+    box-shadow: none;
+    border: 1px solid #ddd;
   }
 }
