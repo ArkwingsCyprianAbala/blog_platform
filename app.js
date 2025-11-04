@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { result } = require('lodash');
@@ -13,12 +14,14 @@ const app = express();
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser()); 
 
 // connect to mongodb
-const dbURI = 'mongodb://localhost:27017/blog';
+// const dbURI = 'mongodb+srv://Cyprian:Abala254@blog-space.qo3ecqk.mongodb.net/blog-platform?appName=blog-space'
+// const dbURI = 'mongodb://localhost:27017/blog';
+const dbURI = process.env.DB_URI;
 mongoose.connect(dbURI)
-    .then((result) => app.listen(3000))
+    .then((result) => app.listen(process.env.PORT || 3000))
     .catch((err) => console.log(err));
 
 //register view engine
