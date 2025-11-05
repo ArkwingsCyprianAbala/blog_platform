@@ -112,6 +112,32 @@
         color: #fff;
         font-size: 0.95rem;
         transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    @media (max-width: 1024px) {
+        .search-input::placeholder {
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .nav-search {
+            max-width: 400px;
+            margin: 0 1rem;
+        }
+
+        .search-input::placeholder {
+            font-size: 0.8rem;
+        }
     }
 
     .search-input:focus {
@@ -121,9 +147,6 @@
         box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
     }
 
-    .search-input::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
 
     .search-button {
         position: absolute;
@@ -369,6 +392,58 @@
         max-height: calc(100vh - 80px);
     }
 
+    /* Nav Toggle Button Styles */
+    .nav-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1001;
+        position: relative;
+    }
+
+    .hamburger {
+        display: block;
+        position: relative;
+        width: 24px;
+        height: 2px;
+        background: #ffffff;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background: #ffffff;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger::before {
+        top: -8px;
+    }
+
+    .hamburger::after {
+        bottom: -8px;
+    }
+
+    .nav-toggle.active .hamburger {
+        background: transparent;
+    }
+
+    .nav-toggle.active .hamburger::before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+
+    .nav-toggle.active .hamburger::after {
+        bottom: 0;
+        transform: rotate(-45deg);
+    }
+
     /* Responsive styles */
     @media (max-width: 768px) {
         .desktop-only {
@@ -387,7 +462,7 @@
 
         .nav-container {
             padding: 0.5rem 1rem;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .nav-brand .logo-text {
@@ -400,6 +475,14 @@
 
         .mobile-search-input {
             font-size: 16px; /* Prevents zoom on iOS */
+        }
+
+        .nav-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
         }
     }
 
@@ -614,47 +697,6 @@
                     `).join('') || '<div class="no-results">No writers found</div>'}
                 </div>
             `;
-        }
-    });
-</script>
-
-<script>
-    // Mobile menu toggle
-    document.addEventListener('DOMContentLoaded', function () {
-        const navToggle = document.querySelector('.nav-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-        const body = document.querySelector('body');
-
-        if (navToggle && navMenu) {
-            navToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                navToggle.classList.toggle('active');
-
-                // Prevent body scroll when menu is open
-                if (navMenu.classList.contains('active')) {
-                    body.style.overflow = 'hidden';
-                } else {
-                    body.style.overflow = '';
-                }
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                    navMenu.classList.remove('active');
-                    navToggle.classList.remove('active');
-                    body.style.overflow = '';
-                }
-            });
-
-            // Close menu when clicking a link
-            navMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    navToggle.classList.remove('active');
-                    body.style.overflow = '';
-                });
-            });
         }
     });
 </script>

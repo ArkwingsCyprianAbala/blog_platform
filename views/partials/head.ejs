@@ -224,65 +224,90 @@
         /* Mobile Menu */
         @media (max-width: 768px) {
           .nav-menu {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: none !important;
+            position: fixed !important;
+            top: 70px !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
             backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            flex-direction: column;
-            gap: 1.5rem;
+            padding: 1.5rem !important;
+            flex-direction: column !important;
+            gap: 1.5rem !important;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            animation: slideDown 0.3s ease forwards;
             overflow-y: auto;
-            z-index: 999;
+            z-index: 1001 !important;
             -webkit-overflow-scrolling: touch;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            width: 100vw !important;
+            height: calc(100vh - 70px) !important;
           }
 
           .nav-menu.active {
-            display: flex;
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
           }
 
-          .nav-links {
-            flex-direction: column;
-            width: 100%;
-            gap: 1rem;
+          .nav-menu .nav-links {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 1rem !important;
+            margin: 0 !important;
+            padding: 0 !important;
           }
 
-          .nav-link {
-            padding: 1rem;
+          .nav-menu .nav-link {
+            display: flex !important;
+            padding: 1rem !important;
             border-radius: 8px;
-            width: 100%;
-            text-align: left;
+            width: 100% !important;
+            text-align: left !important;
+            color: #ffffff !important;
+            opacity: 1 !important;
+            visibility: visible !important;
           }
 
-          .nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
+          .nav-menu .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
           }
 
-          .nav-auth {
-            margin: 0;
-            padding: 1rem 0 0 0;
-            border-left: none;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-            flex-direction: column;
-            width: 100%;
-            gap: 1rem;
+          .nav-menu .nav-auth {
+            display: flex !important;
+            margin: 0 !important;
+            padding: 1rem 0 0 0 !important;
+            border-left: none !important;
+            border-top: 2px solid rgba(255, 255, 255, 0.1) !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 1rem !important;
           }
 
-          .nav-auth .signup {
-            text-align: center;
-            width: 100%;
-            padding: 1rem;
+          .nav-menu .nav-auth .signup {
+            display: inline-block !important;
+            text-align: center !important;
+            width: 100% !important;
+            padding: 1rem !important;
+            color: #ffffff !important;
           }
 
-          .nav-auth .login {
-            text-align: center;
-            width: 100%;
-            padding: 1rem;
+          .nav-menu .nav-auth .login {
+            display: inline-block !important;
+            text-align: center !important;
+            width: 100% !important;
+            padding: 1rem !important;
+            color: #64B5F6 !important;
+          }
+
+          .nav-menu .user-info {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            color: #ffffff !important;
           }
 
           .nav-toggle {
@@ -341,10 +366,42 @@
 
           .nav-container {
             flex-wrap: nowrap;
+            position: relative;
           }
 
           .logo-text {
             font-size: 1.2rem;
+          }
+
+          /* Ensure nav-menu is not constrained by nav-container */
+          .navbar .nav-container .nav-menu {
+            position: fixed !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: 70px !important;
+            bottom: 0 !important;
+            margin: 0 !important;
+          }
+
+          /* Ensure nav-links container is visible */
+          .nav-menu.active .nav-links {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+
+          /* Ensure each nav link is visible */
+          .nav-menu.active .nav-link {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+
+          /* Ensure nav-auth is visible */
+          .nav-menu.active .nav-auth {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
           }
         }
 
@@ -470,45 +527,87 @@
       </style>
 
       <script>
-        const navbar = document.querySelector('.navbar');
-        const navToggle = document.querySelector('.nav-toggle');
-        const navMenu = document.querySelector('.nav-menu');
+        document.addEventListener('DOMContentLoaded', function() {
+          const navbar = document.querySelector('.navbar');
+          const navToggle = document.querySelector('.nav-toggle');
+          const navMenu = document.querySelector('.nav-menu');
 
-        // Hide navbar on scroll down, show on scroll up
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-          const currentScroll = window.pageYOffset;
-          if (currentScroll <= 0) {
-            navbar.style.transform = 'translateY(0)';
-            return;
+          // Hide navbar on scroll down, show on scroll up
+          if (navbar && navMenu) {
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+              const currentScroll = window.pageYOffset;
+              if (currentScroll <= 0) {
+                navbar.style.transform = 'translateY(0)';
+                return;
+              }
+
+              if (currentScroll > lastScroll && !navMenu.classList.contains('active')) {
+                navbar.style.transform = 'translateY(-100%)';
+              } else {
+                navbar.style.transform = 'translateY(0)';
+              }
+              lastScroll = currentScroll;
+            });
           }
 
-          if (currentScroll > lastScroll && !navMenu.classList.contains('active')) {
-            navbar.style.transform = 'translateY(-100%)';
-          } else {
-            navbar.style.transform = 'translateY(0)';
-          }
-          lastScroll = currentScroll;
-        });
+          // Mobile menu toggle
+          if (navToggle && navMenu) {
+            navToggle.addEventListener('click', (e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              
+              const isActive = navMenu.classList.contains('active');
+              
+              if (isActive) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+              } else {
+                navMenu.classList.add('active');
+                navToggle.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Force layout recalculation
+                navMenu.offsetHeight;
+                
+                // Ensure all child elements are visible
+                const navLinks = navMenu.querySelectorAll('.nav-link');
+                const navAuth = navMenu.querySelector('.nav-auth');
+                navLinks.forEach(link => {
+                  link.style.display = 'flex';
+                  link.style.visibility = 'visible';
+                  link.style.opacity = '1';
+                });
+                if (navAuth) {
+                  navAuth.style.display = 'flex';
+                  navAuth.style.visibility = 'visible';
+                  navAuth.style.opacity = '1';
+                }
+              }
+            });
 
-        // Mobile menu toggle
-        navToggle.addEventListener('click', () => {
-          navMenu.classList.toggle('active');
-          navToggle.classList.toggle('active');
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+              if (navMenu && navMenu.classList.contains('active') && 
+                  !navMenu.contains(e.target) && 
+                  !navToggle.contains(e.target) &&
+                  !e.target.closest('.nav-menu')) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+              }
+            });
 
-          if (navMenu.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-          } else {
-            document.body.style.overflow = '';
-          }
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-          if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            document.body.style.overflow = '';
+            // Close menu when clicking a link
+            const navLinks = navMenu.querySelectorAll('a');
+            navLinks.forEach(link => {
+              link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+              });
+            });
           }
         });
       </script>
